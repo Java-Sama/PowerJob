@@ -1,47 +1,19 @@
 {
-  "name": "Java 8",
-  "image": "eclipse-temurin:8u392-b08-jdk"
-//  "build": {
-//    "dockerfile": "Dockerfile"
-//  },
-//  "features": {
-//    "ghcr.io/devcontainers/features/java:1": {
-//      "version": "8"
-//    },
-//    "ghcr.io/devcontainers/features/node:1": "none",
-//    "ghcr.io/devcontainers/features/git:1": {
-//      "version": "latest",
-//      "ppa": "false"
-//    }
-//  },
-
-//  // Configure tool-specific properties.
-//  "customizations": {
-//    // Configure properties specific to VS Code.
-//    "vscode": {
-//      // Set *default* container specific settings.json values on container create.
-//      "settings": {
-//        "java.import.gradle.java.home": "/usr/local/sdkman/candidates/java/current",
-//        "java.configuration.runtimes": [
-//          {
-//            "default": true,
-//            "name": "JavaSE-1.8",
-//            "path": "/usr/local/sdkman/candidates/java/current"
-//          }
-//        ]
-//      },
-//      // Add the IDs of extensions you want installed when the container is created.
-//      "extensions": [
-//        "vscjava.vscode-java-pack"
-//      ]
-//    }
-//  },
-  // Use 'forwardPorts' to make a list of ports inside the container available locally.
-  // "forwardPorts": [],
-
-  // Use 'postCreateCommand' to run commands after the container is created.
-  // "postCreateCommand": "java -version",
-
-  // Set `remoteUser` to `root` to connect as root instead. More info: https://aka.ms/vscode-remote/containers/non-root.
-//  "remoteUser": "vscode"
+  "name": "PowerJob", // 容器名称
+  "build": {
+    "dockerfile": "Dockerfile", // 指定 dockerfile 文件的路径
+    "args": { "VARIANT": "18-buster-slim" } // Debian 版本，传入 dockerfile
+  },
+  // 挂载 volume，将本地的 pnpm 目录挂载到容器中，共享一个 pnpm 目录，节省空间
+  "mounts": [
+    {
+      "source": "${localEnv:HOME}/.m2",
+      "target": "/root/.m2",
+      "type": "bind"
+    }
+  ],
+  // 容器关闭后需要执行的操作，这里是停止容器
+  "shutdownAction": "stopContainer",
+  // 容器的权限，这里设置为 root
+  "remoteUser": "root"
 }
