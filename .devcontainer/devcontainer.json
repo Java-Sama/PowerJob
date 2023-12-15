@@ -2,7 +2,7 @@
   "name": "PowerJob", // 容器名称
   "build": {
     "dockerfile": "Dockerfile", // 指定 dockerfile 文件的路径
-    "args": { "VARIANT": "18-buster-slim" } // Debian 版本，传入 dockerfile
+    "args": { "VARIANT": "bookworm-slim" } // Debian 版本，传入 dockerfile
   },
   // 挂载 volume，将本地的 pnpm 目录挂载到容器中，共享一个 pnpm 目录，节省空间
   "mounts": [
