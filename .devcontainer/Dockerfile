@@ -1,7 +1,7 @@
 # 设置变量，由 .devcontainer.json 中的 args 传入
 ARG VARIANT
 # 指定 node 版本
-FROM debain:${VARIANT}
+FROM debian:${VARIANT}
 
 # 设置编码
 ENV LANG C.UTF-8
